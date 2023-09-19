@@ -1,0 +1,39 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/backend/dist
+/backend/tmp
+/backend/out-tsc
+
+# dependencies
+/backend/node_modules
+
+# IDEs and editors
+/backend/.idea
+/backend/.project
+/backend/.classpath
+/backend/.c9/
+/backend/*.launch
+/backend/.settings/
+/backend/*.sublime-workspace
+
+# IDE - VSCode
+/backend/.vscode/*
+/backend/!.vscode/settings.json
+/backend/!.vscode/tasks.json
+/backend/!.vscode/launch.json
+/backend/!.vscode/extensions.json
+
+# misc
+/backend//.sass-cache
+/backend//connect.lock
+/backend//coverage
+/backend//libpeerconnection.log
+/backend/npm-debug.log
+/backend/yarn-error.log
+/backend/testem.log
+/backend//typings
+
+# System Files
+.DS_Store
+Thumbs.db
