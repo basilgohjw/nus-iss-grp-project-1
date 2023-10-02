@@ -1,0 +1,18 @@
+version: '3'
+name: nus-iss-grp-db
+services:
+    mysql:
+        container_name: 'nus-iss-grp-app'
+        image: ???
+        volumes:
+        ./logs:/usr/local/tomcat/logs
+        ./deploy/LoginWebApp-1.war:/usr/local/tomcat/webapps/LoginWebApp-1.war
+        restart: always
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+                window: 120s
+        ports:
+            - '8080:8080'

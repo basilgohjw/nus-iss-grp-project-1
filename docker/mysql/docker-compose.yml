@@ -1,0 +1,25 @@
+version: '3'
+name: nus-iss-grp-db
+services:
+    mysql:
+        container_name: 'nus-iss-grp-db'
+        image: mysql:8
+        command: --default-authentication-plugin=caching_sha2_password
+        restart: always
+        environment:
+            MYSQL_USER: 'dbuser'
+            MYSQL_DATABASE: 'nus-iss-grp1-db'
+            MYSQL_PASSWORD: 'nus-iss-grp1-db-password'
+            MYSQL_ROOT_PASSWORD: 'lgf7;UISU^_Cpp7%0%NP=*6=Hc02A1b8'
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+                window: 120s
+        volumes:
+            dbdata:/opt/docker/mysql/volumes
+        ports:
+            - '3306:3306'
+            - '33060:33060'
+            - '33061:33061'
