@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.easymarket.demo;
 
 import java.util.Properties;
 
