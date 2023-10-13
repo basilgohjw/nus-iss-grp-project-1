@@ -2,8 +2,33 @@
   color: red;
 }
 .login{
-  background-image:  url(/assets/img/login.png);
+  background-image:  url(/assets/img/login1.jpg);
 }
 .row{
   margin-top: 15px;
 }
+
+.register-input-box {
+  display:flex;
+}
+
+.register-input-label {
+  width: 17%;
+  padding-top: 5px;
+}
+
+.register-input {
+  width: 50%;
+}
+
+.invalid-error {
+  padding-left: 17%;
+  color: red;
+}
+
+.required {
+  color: red;
+  padding-left: 10px;
+  font-weight: bold;
+}
+

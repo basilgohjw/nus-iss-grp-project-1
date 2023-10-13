@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   fileToUpload: File = null;
   showAdd = false;
   auth: string;
+  
   constructor(private api: ApiService, private router: Router) { }
   imageUrl: string = "/assets/img/noimage.png";
   ngOnInit() {
@@ -61,5 +62,18 @@ export class AdminComponent implements OnInit {
       }
     };
     this.router.navigate(["admin/edit"], navigationExtras);
+  }
+
+  onKeyPressNumeric(e) {
+    var valid = false;
+    var key = e.keyCode || e.which;
+
+    if (key >= 48 && 57 >= key) {
+      valid = true;
+    }
+    if (!valid) {
+      e.preventDefault();
+    }
+    return valid;
   }
 }

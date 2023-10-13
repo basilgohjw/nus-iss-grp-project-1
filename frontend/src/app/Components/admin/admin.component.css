@@ -9,3 +9,16 @@
 .mybtnclr{
     margin-left:10px;
 }
+
+.input-box {
+    display:flex;
+}
+
+.image-display {
+    width: 425px;
+    height: 300px;
+}
+
+.input-label {
+    padding-left: 0;
+}

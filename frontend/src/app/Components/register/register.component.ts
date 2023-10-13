@@ -26,8 +26,30 @@ export class RegisterComponent implements OnInit {
       usertype: 'customer'
     });
   }
-  register(): void {
 
+  validateEmail() {
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.registerForm.value.email)) && this.registerForm.value.email != '' && this.registerForm.value.email != null) {
+      return true;
+    }
+    return false;
+  }
+
+  validateRegisterButton() {
+    if ((this.registerForm.value.email == null || this.registerForm.value.email == '') || (this.registerForm.value.password == null || this.registerForm.value.password == '') || 
+      (this.registerForm.value.password != '' && this.registerForm.value.password.length < 8)) {
+      return true;
+    }
+    return false;
+  }
+
+  validatePwCount() {
+    if (this.registerForm.value.password != '' && this.registerForm.value.password.length < 8) {
+      return true;
+    }
+    return false;
+  }
+
+  register(): void {
     this.apiService.register(this.registerForm.value).
       subscribe(res => {
         if (res.status == "400") {
@@ -40,5 +62,6 @@ export class RegisterComponent implements OnInit {
           alert("An error has occured, Please try again !!!");
         });
   }
+  
 }
 

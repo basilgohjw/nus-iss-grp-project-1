@@ -26,6 +26,24 @@ export class LoginComponent implements OnInit {
       password: ''
     });
   }
+
+  validateEmail() {
+    console.log("Validate email: ", this.loginForm.value.email);
+    // if (this.loginForm.value.email != null &&   
+    //  !(this.loginForm.value.email.indexOf('@') !== -1) && !(this.loginForm.value.email.indexOf('.') !== -1)) {
+    //   console.log("Return false");
+    //   return false;
+    // } else {
+    //   console.log("Return true");
+    //   return true;
+    // }
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email) && this.loginForm.value.email != '' && this.loginForm.value.email != null) {
+      // if (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+      return true;
+    }
+    return false;
+  }
+
   login(): void {
     this.apiService.login(this.loginForm.value).
       subscribe(res => {
@@ -43,4 +61,5 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/login']);
       });
   }
+  
 }

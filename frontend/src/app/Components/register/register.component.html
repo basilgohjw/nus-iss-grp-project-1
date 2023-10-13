@@ -6,22 +6,39 @@
                 <div class="card-body">
                     <form [formGroup]="registerForm" (ngSubmit)="register()">
                         <div class="form-group">
-                            <input class="form-control" type="email" formControlName="email" placeholder="xyz@gmail.com"
-                                style="width:50%" required>
+                            <div class="register-input-box">
+                                <span class="register-input-label">*Email:</span>
+                                <input class="form-control register-input" type="email" formControlName="email" placeholder="xyz@gmail.com" required>
+                                <label class="register-input-label required" *ngIf="registerForm.value.email == ''">Required</label>
+                            </div>
+                            <div class="invalid-error" *ngIf="validateEmail()">
+                                <label>* Please enter a valid Email address.</label>
+                            </div>
+                            
                         </div>
                         <div class="form-group">
-                            <input class="form-control" formControlName="username" placeholder="Username"
-                                style="width:50%">
+                            <div class="register-input-box">
+                                <span class="register-input-label">Username:</span>
+                                <input class="form-control register-input" formControlName="username" placeholder="Username">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" formControlName="password"
-                                placeholder="Password" style="width:50%">
+                            <div class="register-input-box">
+                                <span class="register-input-label">Password:</span>
+                                <input class="form-control register-input" type="password" formControlName="password" placeholder="Password" required minlength="8">
+                                <label class="register-input-label required" *ngIf="registerForm.value.password == ''">Required</label>
+                            </div>
+                            <div class="invalid-error" *ngIf="validatePwCount()">
+                                <label>* Your Password must be a minimum of 8 characters.</label>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="number" formControlName="age" placeholder="Age"
-                                style="width:50%">
+                            <div class="register-input-box">
+                                <span class="register-input-label">Age:</span>
+                                <input class="form-control register-input" type="number" formControlName="age" placeholder="Age">
+                            </div>
                         </div>
-                        <input type="submit" class="btn btn-secondary align-right" value="Register">
+                        <input type="submit" class="btn btn-secondary align-right" value="Register" [disabled]="validateRegisterButton()">
                     </form>
                 </div>
             </div>
