@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Service/api.service';
+import { ApiService } from 'src/app/service/api.service';
 import { Cart } from 'src/app/Model/cart';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';

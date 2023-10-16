@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } fro
 import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/Service/api.service';
+import { ApiService } from 'src/app/service/api.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

@@ -15,18 +15,20 @@ export class ApiService {
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
 
   }
-  // Registering new users to the system
+  
+  // Register new users to the system
   register(user: User): Observable<any> {
-    return this.http.post(environment.baseUrl+environment.signupUrl,
+    return this.http.post(environment.userBaseUrl+environment.signupUrl,
       JSON.stringify(user),
       {
         headers:
           { 'Content-Type': 'application/json' }
       });
   }
-  // validating user credentials
+  
+  // Validating user credentials
   login(user: User): Observable<any> {
-    return this.http.post(environment.baseUrl+environment.loginUrl,
+    return this.http.post(environment.userBaseUrl+environment.loginUrl,
       JSON.stringify(user),
       {
         headers:
@@ -35,46 +37,22 @@ export class ApiService {
   }
 
   logout(){
-    this.http.get<any>(environment.baseUrl+environment.logoutUrl);
+    this.http.get<any>(environment.userBaseUrl+environment.logoutUrl);
   }
 
-  // Add Products to the Cart
-  addToCart(product: Product ): Observable<any> {
-    return this.http.get<any>(environment.baseUrl+environment.addToCartUrl +"?productId="+product.productid);
-  }
-
-  // View Cart items
-  getCartItems(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl+environment.viewCartUrl);
-  }
-
-  // update items quantity in the cart
-  updateCartItem(prodid: number, quant: number): Observable<any> {
-    var map = {
-      "id":prodid,
-      "quantity":quant
-    }
-    return this.http.put<any>(environment.baseUrl+environment.updateCartUrl, map);
-  }
-
-  // delete cart Item 
-  deleteCartItem(bufdid: number): Observable<any> {
-    return this.http.delete<any>(environment.baseUrl+environment.deleteCartUrl + "?bufcartid=" + bufdid);
-  }
-
-  // update Address 
+  // Update Address 
   addOrUpdateAddress(adr: Address): Observable<any> {
-    return this.http.post<any>(environment.baseUrl+environment.addAddressUrl, adr);
+    return this.http.post<any>(environment.userBaseUrl+environment.addAddressUrl, adr);
   }
 
-  // fetch address 
+  // Fetch address 
   getAddress(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl+environment.viewAddressUrl);
+    return this.http.get<any>(environment.userBaseUrl+environment.viewAddressUrl);
   }
 
-   // Fetching all the products
-   getProducts(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl+environment.productsUrl);
+  // Fetching all the products
+  getProducts(): Observable<any> {
+    return this.http.get<any>(environment.productBaseUrl+environment.productsUrl);
   }
 
   // Add product in the system
@@ -86,11 +64,11 @@ export class ApiService {
     formData.append("productname", prodname);
     formData.append("quantity", quan);
     formData.append("file", image);
-    return this.http.post<any>(environment.baseUrl+environment.addProductUrl, formData);
+    return this.http.post<any>(environment.productBaseUrl+environment.addProductUrl, formData);
 
   }
   
-  // update Product for Logged Admin User
+  // Update Product for Logged Admin User
   updateProduct( desc: string,
     quan: string, price: string, prodname: string, image: File, productid: any): Observable<any> {
     const formData: FormData = new FormData();
@@ -100,34 +78,57 @@ export class ApiService {
     formData.append("quantity", quan);
     formData.append("file", image);
     formData.append("productId", productid);
-    return this.http.put<any>(environment.baseUrl+environment.updateProductUrl, formData);
+    return this.http.put<any>(environment.productBaseUrl+environment.updateProductUrl, formData);
   }
 
-  // delete Product
+  // Delete Product
   deleteProduct( prodid: number) {
-    return this.http.delete<any>(environment.baseUrl+environment.deleteProductUrl + "?productId=" + prodid);
+    return this.http.delete<any>(environment.productBaseUrl+environment.deleteProductUrl + "?productId=" + prodid);
   }
 
-  // fetch available orders placed
+  // Add products to the cart
+  addToCart(product: Product): Observable<any> {
+    return this.http.get<any>(environment.productBaseUrl+environment.addToCartUrl +"?productId="+product.productid);
+  }
+
+  // View cart items
+  getCartItems(): Observable<any> {
+    return this.http.get<any>(environment.orderBaseUrl+environment.viewCartUrl);
+  }
+
+  // Update items quantity in the cart
+  updateCartItem(prodid: number, quant: number): Observable<any> {
+    var map = {
+      "id":prodid,
+      "quantity":quant
+    }
+    return this.http.put<any>(environment.orderBaseUrl+environment.updateCartUrl, map);
+  }
+
+  // Delete cart Item 
+  deleteCartItem(bufdid: number): Observable<any> {
+    return this.http.delete<any>(environment.orderBaseUrl+environment.deleteCartUrl + "?bufcartid=" + bufdid);
+  }
+
+  // Fetch available orders placed
   getOrders() {
-    return this.http.get<any>(environment.baseUrl+environment.viewOrderUrl)
+    return this.http.get<any>(environment.orderBaseUrl+environment.viewOrderUrl)
   }
 
-   // place the order 
-   placeOrder(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl+environment.placeOrderUrl);
+  // Place the order 
+  placeOrder(): Observable<any> {
+    return this.http.get<any>(environment.orderBaseUrl+environment.placeOrderUrl);
   }
 
-  // update status for order
+  // Update status for order
   updateStatusForOrder( order: any) {
     const formData: FormData = new FormData();
     formData.append("orderId", order.orderId);
     formData.append("orderStatus", order.orderStatus);
-    return this.http.post<any>(environment.baseUrl+environment.updateOrderUrl, formData)
+    return this.http.post<any>(environment.orderBaseUrl+environment.updateOrderUrl, formData)
   }
 
   // Authentication Methods 
-
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }

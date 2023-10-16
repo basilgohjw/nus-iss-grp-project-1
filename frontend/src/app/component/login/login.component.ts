@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Service/api.service';
+import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
@@ -57,8 +57,15 @@ export class LoginComponent implements OnInit {
           this.error = false;
         }
       },
-        err => {
-          this.router.navigate(['/login']);
+      err => {
+        console.log(err);
+        if (err.status == "404") {
+          alert("Username is not found. Please try again :)");
+        }
+        if (err.status == "403") {
+          alert("Invalid password. Please try again :)");
+        }
+        this.router.navigate(['/login']);
       });
   }
   

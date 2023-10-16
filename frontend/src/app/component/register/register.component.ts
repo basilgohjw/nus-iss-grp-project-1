@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/Service/api.service';
+import { ApiService } from 'src/app/service/api.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -15,8 +15,8 @@ export class RegisterComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+  
   createForm() {
     this.registerForm = this.formBuilder.group({
       email: '',
@@ -53,14 +53,15 @@ export class RegisterComponent implements OnInit {
     this.apiService.register(this.registerForm.value).
       subscribe(res => {
         if (res.status == "400") {
-          console.log("Details cannot be empty");
+          console.log("Details cannot be empty :)");
         } else {
           this.router.navigate(['/login']);
+          alert("Your account has been registered successfully. Please login :)");
         }
       },
-        err => {
-          alert("An error has occured, Please try again !!!");
-        });
+      err => {
+        alert("An error has occured. Please try again :)");
+      });
   }
   
 }

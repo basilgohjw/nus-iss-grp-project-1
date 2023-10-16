@@ -7,19 +7,19 @@ import {StorageServiceModule} from 'angular-webstorage-service';
 import {Router, Routes, RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { NavigationComponent } from './Components/navigation/navigation.component';
-import { LoginComponent } from './Components/login/login.component';
-import { RegisterComponent } from './Components/register/register.component';
-import { HomeComponent } from './Components/home/home.component';
-import { AuthguardGuard } from './Service/authguard.guard';
-import { AdminComponent } from './Components/admin/admin.component';
+import { NavigationComponent } from './component/navigation/navigation.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { HomeComponent } from './component/home/home.component';
+import { AuthguardGuard } from './service/auth.guard';
+import { AdminComponent } from './component/admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductComponent } from './Components/home/product/product.component';
-import { CartItemComponent } from './Components/home/cart-item/cart-item.component';
-import { AddressComponent } from './Components/home/address/address.component';
-import { EditItemComponent } from './Components/admin/edit-item/edit-item.component';
-import { OrderItemComponent } from './Components/admin/order-item/order-item.component';
-import { AuthInterceptor } from './Service/AuthInterceptor';
+import { ProductComponent } from './component/home/product/product.component';
+import { CartItemComponent } from './component/home/cart-item/cart-item.component';
+import { AddressComponent } from './component/home/address/address.component';
+import { EditItemComponent } from './component/admin/edit-item/edit-item.component';
+import { OrderItemComponent } from './component/admin/order-item/order-item.component';
+import { AuthInterceptor } from './service/auth.interceptor';
 const appRoutes:Routes=[
   { path: '',
     redirectTo: '/login',
