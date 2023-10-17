@@ -1,17 +1,24 @@
 package com.spring.response;
 
+import com.spring.model.User;
+
 public class ServerResponse {
+	private User user;
 	private String status;
 	private String message;
 	private String authToken;
 	private String userType;
 
-	public String getAuthToken() {
-		return authToken;
+	public ServerResponse() {
+		super();
 	}
 
-	public void setAuthToken(String authToken) {
-		this.authToken = authToken;
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getStatus() {
@@ -30,8 +37,12 @@ public class ServerResponse {
 		this.message = message;
 	}
 
-	public ServerResponse() {
-		super();
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
 	}
 
 	public String getUserType() {

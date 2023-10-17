@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from '../Model/product';
-import { User } from '../Model/user';
+import { Product } from '../model/product';
+import { User } from '../model/user';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
-import { Address } from '../Model/address';
+import { Address } from '../model/address';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -61,11 +61,13 @@ public class HomeController {
 			throw new UserCustomException("Invalid User Credentials");
 		}
 		final UserDetails userDetails = userDetailService.loadUserByUsername(email);
+		final User user = userRepo.findByUsername(email).orElse(null);
 		final String jwt = jwtutil.generateToken(userDetails);
 
 		ServerResponse resp = new ServerResponse();
 		resp.setStatus(ResponseCode.SUCCESS_CODE);
 		resp.setMessage(ResponseCode.SUCCESS_MESSAGE);
+		resp.setUser(user);
 		resp.setAuthToken(jwt);
 
 		if (userDetails != null
@@ -92,6 +94,8 @@ public class HomeController {
 			} else {
 				resp.setStatus(ResponseCode.SUCCESS_CODE);
 				resp.setMessage(ResponseCode.CUST_REG);
+				// to set account as enabled
+				user.setEnabled(true);
 				userRepo.save(user);
 			}
 		} catch (Exception e) {

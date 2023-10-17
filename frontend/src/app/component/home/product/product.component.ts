@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from 'src/app/Model/product';
+import { Product } from 'src/app/model/product';
 import { EventEmitter } from '@angular/core';
 
 

@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.apiService.login(this.loginForm.value).
       subscribe(res => {
+        console.log("Response: ", res);
         if (res.status == "200" && res.userType == "CUSTOMER") {
           this.apiService.storeToken(res.authToken, "customer");
           this.router.navigate(['/home']);

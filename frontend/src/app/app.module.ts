@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import {StorageServiceModule} from 'angular-webstorage-service';
-import {Router, Routes, RouterModule} from '@angular/router';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { StorageServiceModule } from 'angular-webstorage-service';
+import { Router, Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
@@ -25,44 +25,44 @@ const appRoutes:Routes=[
     redirectTo: '/login',
     pathMatch: 'full'
   },
-{
-  path:'login',
-  component: LoginComponent
-},
-{
-  path:'register',
-  component: RegisterComponent
-},
-{
-  path:'admin',
-  component: AdminComponent
-}
-,
-{
-  path:'home',
-  component: HomeComponent,
-  canActivate:[AuthguardGuard]
-},
-{
-  path:'home/cart',
-  component: CartItemComponent,
-  canActivate:[AuthguardGuard]
-},
-{
-  path:'home/address',
-  component: AddressComponent,
-  canActivate:[AuthguardGuard]
-},
-{
-  path:'admin/edit',
-  component: EditItemComponent,
-  canActivate:[AuthguardGuard]
-},
-{
-  path:'admin/order',
-  component: OrderItemComponent,
-  canActivate:[AuthguardGuard]
-}
+  {
+    path:'login',
+    component: LoginComponent
+  },
+  {
+    path:'register',
+    component: RegisterComponent
+  },
+  {
+    path:'admin',
+    component: AdminComponent
+  }
+  ,
+  {
+    path:'home',
+    component: HomeComponent,
+    canActivate:[AuthguardGuard]
+  },
+  {
+    path:'home/cart',
+    component: CartItemComponent,
+    canActivate:[AuthguardGuard]
+  },
+  {
+    path:'home/address',
+    component: AddressComponent,
+    canActivate:[AuthguardGuard]
+  },
+  {
+    path:'admin/edit',
+    component: EditItemComponent,
+    canActivate:[AuthguardGuard]
+  },
+  {
+    path:'admin/order',
+    component: OrderItemComponent,
+    canActivate:[AuthguardGuard]
+  }
 ];
 
 @NgModule({

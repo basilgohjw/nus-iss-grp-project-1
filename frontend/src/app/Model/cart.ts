@@ -1,5 +1,4 @@
 export interface Cart {
-
     bufcartId: number;
     orderId: number;
     email: string;

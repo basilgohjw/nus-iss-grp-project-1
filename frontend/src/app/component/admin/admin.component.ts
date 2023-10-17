@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { Product } from 'src/app/Model/product';
+import { Product } from 'src/app/model/product';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
