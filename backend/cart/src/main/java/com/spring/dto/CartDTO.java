@@ -1,22 +1,22 @@
 package com.spring.dto;
 
 public class CartDTO {
-    private String cartId;
-    private String cartQuantity;
+    private int cartId;
+    private int cartQuantity;
 
-    public String getCartId() {
+    public int getCartId() {
         return cartId;
     }
 
-    public void setCartId(String cartId) {
+    public void setCartId(int cartId) {
         this.cartId = cartId;
     }
 
-    public String getCartQuantity() {
+    public int getCartQuantity() {
         return cartQuantity;
     }
 
-    public void setCartQuantity(String cartQuantity) {
+    public void setCartQuantity(int cartQuantity) {
         this.cartQuantity = cartQuantity;
     }
 }

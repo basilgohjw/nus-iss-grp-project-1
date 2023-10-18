@@ -1,4 +1,4 @@
 export class CartDTO {
-    cartId: string;
-    cartQuantity: string;
+    cartId: number;
+    cartQuantity: number;
 }

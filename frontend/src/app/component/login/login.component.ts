@@ -45,15 +45,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log("Login Form Value: ", this.loginForm.value);
     this.apiService.login(this.loginForm.value).
       subscribe(res => {
         console.log("Response: ", res);
         if (res.status == "200" && res.userType == "CUSTOMER") {
           this.apiService.storeToken(res.authToken, "customer");
+          this.apiService.storeUserInfo(res.user);
           this.router.navigate(['/home']);
           this.error = false;
         } else if (res.status == "200" && res.userType == "ADMIN") {
           this.apiService.storeToken(res.authToken, "admin");
+          this.apiService.storeUserInfo(res.user);
           this.router.navigate(['/admin']);
           this.error = false;
         }

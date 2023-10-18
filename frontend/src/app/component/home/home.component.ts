@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit {
   addToCart(e) {
     this.api.addToCart(e).subscribe(res => {
       console.log(res);
-    })
+    }, 
+    err => {
+      console.log("Error: ", err);
+      alert("An error has occured. Please try again :)");
+    });
   }
 }

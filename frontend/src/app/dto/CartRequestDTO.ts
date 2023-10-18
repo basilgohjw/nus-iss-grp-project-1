@@ -3,7 +3,12 @@ import { UserDTO } from "./UserDTO";
 import { CartDTO } from "./CartDTO";
 
 export class CartRequestDTO {
-    userDTO: UserDTO;
-    productDTO: ProductDTO;
-    cartDTO: CartDTO;
+    name: string;
+    email: string;
+    cartId: number;
+    cartQuantity: number;
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productQuantity: number;
 }

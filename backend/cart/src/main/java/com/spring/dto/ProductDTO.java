@@ -2,16 +2,16 @@ package com.spring.dto;
 
 public class ProductDTO {
 
-    private String productId;
+    private int productId;
     private String productName;
     private double productPrice;
     private int productQuantity;
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 

@@ -1,5 +1,5 @@
 export class ProductDTO {
-    productId: string;
+    productId: number;
     productName: string;
     productPrice: number;
     productQuantity: number;

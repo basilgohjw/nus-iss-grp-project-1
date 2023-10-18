@@ -6,11 +6,39 @@ import { User } from '../model/user';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Address } from '../model/address';
 import { environment } from 'src/environments/environment';
+import { CartDTO } from '../dto/CartDTO';
+import { CartRequestDTO } from '../dto/CartRequestDTO';
+import { ProductDTO } from '../dto/ProductDTO';
+import { UserDTO } from '../dto/UserDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  cartDTO: CartDTO = {
+    cartId: null,
+    cartQuantity: 0
+  };
+  productDTO: ProductDTO = {
+    productId: null,
+    productName: '',
+    productPrice: 0,
+    productQuantity: 0
+  };
+  userDTO: UserDTO = {
+    name: '',
+    email: ''
+  };
+  cartRequestDTO: CartRequestDTO = {
+    name: '',
+    email: '',
+    cartId: 0,
+    cartQuantity: 0,
+    productId: 0,
+    productName: '',
+    productPrice: 0,
+    productQuantity: 0
+  };
   
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
 
@@ -42,7 +70,12 @@ export class ApiService {
 
   // Update Address 
   addOrUpdateAddress(adr: Address): Observable<any> {
-    return this.http.post<any>(environment.userBaseUrl+environment.addAddressUrl, adr);
+    return this.http.post<any>(environment.userBaseUrl+environment.addAddressUrl, 
+      adr, 
+      {
+        headers:
+          { 'Content-Type': 'application/json' }
+      });
   }
 
   // Fetch address 
@@ -65,7 +98,6 @@ export class ApiService {
     formData.append("quantity", quan);
     formData.append("file", image);
     return this.http.post<any>(environment.productBaseUrl+environment.addProductUrl, formData);
-
   }
   
   // Update Product for Logged Admin User
@@ -87,27 +119,40 @@ export class ApiService {
   }
 
   // Add products to the cart
-  addToCart(product: Product): Observable<any> {
-    return this.http.get<any>(environment.productBaseUrl+environment.addToCartUrl +"?productId="+product.productid);
+  addToCart(product: any): Observable<any> {
+    this.cartRequestDTO.name = this.storage.get("username");
+    this.cartRequestDTO.email = this.storage.get("email");
+    this.cartRequestDTO.productId = product.productid;
+    this.cartRequestDTO.productName = product.productname;
+    this.cartRequestDTO.productPrice = product.price;
+    console.log("this.cartRequestDTO: ", this.cartRequestDTO);
+    return this.http.post<any>(environment.productBaseUrl+environment.addToCartUrl, this.cartRequestDTO);
   }
 
   // View cart items
   getCartItems(): Observable<any> {
-    return this.http.get<any>(environment.orderBaseUrl+environment.viewCartUrl);
+    this.userDTO.name = this.storage.get("username");
+    this.userDTO.email = this.storage.get("email");
+    return this.http.post<any>(environment.orderBaseUrl+environment.viewCartUrl, this.userDTO);
   }
 
   // Update items quantity in the cart
   updateCartItem(prodid: number, quant: number): Observable<any> {
-    var map = {
-      "id":prodid,
-      "quantity":quant
-    }
-    return this.http.put<any>(environment.orderBaseUrl+environment.updateCartUrl, map);
+    this.cartRequestDTO.name = this.storage.get("username");
+    this.cartRequestDTO.email = this.storage.get("email");
+    this.cartRequestDTO.cartId = prodid;
+    this.cartRequestDTO.cartQuantity = quant;
+    console.log("this.cartRequestDTO: ", this.cartRequestDTO);
+    return this.http.put<any>(environment.orderBaseUrl+environment.updateCartUrl, this.cartRequestDTO);
   }
 
   // Delete cart Item 
   deleteCartItem(bufdid: number): Observable<any> {
-    return this.http.delete<any>(environment.orderBaseUrl+environment.deleteCartUrl + "?bufcartid=" + bufdid);
+    this.cartRequestDTO.name = this.storage.get("username");
+    this.cartRequestDTO.email = this.storage.get("email");
+    this.cartRequestDTO.cartId = bufdid;
+    console.log("this.cartRequestDTO: ", this.cartRequestDTO);
+    return this.http.post<any>(environment.orderBaseUrl+environment.deleteCartUrl, this.cartRequestDTO);
   }
 
   // Fetch available orders placed
@@ -136,6 +181,11 @@ export class ApiService {
   storeToken(token: string, auth_type: string) {
     this.storage.set("auth_token", token);
     this.storage.set("auth_type", auth_type);
+  }
+
+  storeUserInfo(user: User) {
+    this.storage.set("username", user.username);
+    this.storage.set("email", user.email);
   }
 
   getAuthType(): string {

@@ -36,8 +36,7 @@ const appRoutes:Routes=[
   {
     path:'admin',
     component: AdminComponent
-  }
-  ,
+  },
   {
     path:'home',
     component: HomeComponent,
