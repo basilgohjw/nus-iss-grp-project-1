@@ -55,12 +55,15 @@ public class CartController {
 //            User loggedUser = Objects.requireNonNull(userResponseEntity.getBody()).getUser();
 //            Product cartItem = Objects.requireNonNull(productResponseEntity.getBody()).getProduct();
 
+            UserDTO userDTO = cartRequestDTO.getUserDTO();
+            ProductDTO productDTO = cartRequestDTO.getProductDTO();
+
             Bufcart buf = new Bufcart();
-            buf.setEmail(cartRequestDTO.getEmail());
+            buf.setEmail(userDTO.getEmail());
             buf.setQuantity(1);
-            buf.setPrice(cartRequestDTO.getProductPrice());
-            buf.setProductId(cartRequestDTO.getProductId());
-            buf.setProductname(cartRequestDTO.getProductName());
+            buf.setPrice(productDTO.getProductPrice());
+            buf.setProductId(productDTO.getProductId());
+            buf.setProductname(productDTO.getProductName());
             Date date = new Date();
             buf.setDateAdded(date);
 
@@ -105,10 +108,13 @@ public class CartController {
 //                            UserResponse.class);
 //            User loggedUser = Objects.requireNonNull(userResponseEntity.getBody()).getUser();
 
-            Bufcart selCart = cartRepo.findByBufcartIdAndEmail(cartRequestDTO.getCartId(), cartRequestDTO.getEmail());
-            selCart.setQuantity(cartRequestDTO.getCartQuantity());
+            UserDTO userDTO = cartRequestDTO.getUserDTO();
+            CartDTO cartDTO = cartRequestDTO.getCartDTO();
+
+            Bufcart selCart = cartRepo.findByBufcartIdAndEmail(cartDTO.getCartId(), userDTO.getEmail());
+            selCart.setQuantity(cartDTO.getCartQuantity());
             cartRepo.save(selCart);
-            List<Bufcart> bufcartlist = cartRepo.findByEmail(cartRequestDTO.getEmail());
+            List<Bufcart> bufcartlist = cartRepo.findByEmail(userDTO.getEmail());
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.UPD_CART_MESSAGE);
             resp.setOblist(bufcartlist);
@@ -129,8 +135,11 @@ public class CartController {
 //                            UserResponse.class);
 //            User loggedUser = Objects.requireNonNull(userResponseEntity.getBody()).getUser();
 
-            cartRepo.deleteByBufcartIdAndEmail(cartRequestDTO.getCartId(), cartRequestDTO.getEmail());
-            List<Bufcart> bufcartlist = cartRepo.findByEmail(cartRequestDTO.getEmail());
+            UserDTO userDTO = cartRequestDTO.getUserDTO();
+            CartDTO cartDTO = cartRequestDTO.getCartDTO();
+
+            cartRepo.deleteByBufcartIdAndEmail(cartDTO.getCartId(), userDTO.getEmail());
+            List<Bufcart> bufcartlist = cartRepo.findByEmail(userDTO.getEmail());
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.DEL_CART_SUCCESS_MESSAGE);
             resp.setOblist(bufcartlist);

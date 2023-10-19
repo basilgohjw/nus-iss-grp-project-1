@@ -2,78 +2,31 @@ package com.spring.dto;
 
 public class CartRequestDTO {
 
-    private String name;
-    private String email;
-    private int cartId;
-    private int cartQuantity;
-    private int productId;
-    private String productName;
-    private double productPrice;
-    private int productQuantity;
+    private UserDTO userDTO;
+    private CartDTO cartDTO;
+    private ProductDTO productDTO;
 
-    public String getName() {
-        return name;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
 
-    public String getEmail() {
-        return email;
+    public CartDTO getCartDTO() {
+        return cartDTO;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCartDTO(CartDTO cartDTO) {
+        this.cartDTO = cartDTO;
     }
 
-    public int getCartId() {
-        return cartId;
+    public ProductDTO getProductDTO() {
+        return productDTO;
     }
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
+    public void setProductDTO(ProductDTO productDTO) {
+        this.productDTO = productDTO;
     }
-
-    public int getCartQuantity() {
-        return cartQuantity;
-    }
-
-    public void setCartQuantity(int cartQuantity) {
-        this.cartQuantity = cartQuantity;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public int getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-
 }

@@ -30,14 +30,9 @@ export class ApiService {
     email: ''
   };
   cartRequestDTO: CartRequestDTO = {
-    name: '',
-    email: '',
-    cartId: 0,
-    cartQuantity: 0,
-    productId: 0,
-    productName: '',
-    productPrice: 0,
-    productQuantity: 0
+    userDTO: this.userDTO,
+    cartDTO: this.cartDTO,
+    productDTO: this.productDTO
   };
   
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
@@ -120,13 +115,15 @@ export class ApiService {
 
   // Add products to the cart
   addToCart(product: any): Observable<any> {
-    this.cartRequestDTO.name = this.storage.get("username");
-    this.cartRequestDTO.email = this.storage.get("email");
-    this.cartRequestDTO.productId = product.productid;
-    this.cartRequestDTO.productName = product.productname;
-    this.cartRequestDTO.productPrice = product.price;
+    this.userDTO.name = this.storage.get("username");
+    this.userDTO.email = this.storage.get("email");
+    this.productDTO.productId = product.productid;
+    this.productDTO.productName = product.productname;
+    this.productDTO.productPrice = product.price;
+    this.cartRequestDTO.userDTO = this.userDTO;
+    this.cartRequestDTO.productDTO = this.productDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
-    return this.http.post<any>(environment.productBaseUrl+environment.addToCartUrl, this.cartRequestDTO);
+    return this.http.post<any>(environment.orderBaseUrl+environment.addToCartUrl, this.cartRequestDTO);
   }
 
   // View cart items
@@ -138,19 +135,23 @@ export class ApiService {
 
   // Update items quantity in the cart
   updateCartItem(prodid: number, quant: number): Observable<any> {
-    this.cartRequestDTO.name = this.storage.get("username");
-    this.cartRequestDTO.email = this.storage.get("email");
-    this.cartRequestDTO.cartId = prodid;
-    this.cartRequestDTO.cartQuantity = quant;
+    this.userDTO.name = this.storage.get("username");
+    this.userDTO.email = this.storage.get("email");
+    this.cartDTO.cartId = prodid;
+    this.cartDTO.cartQuantity = quant;
+    this.cartRequestDTO.userDTO = this.userDTO;
+    this.cartRequestDTO.cartDTO = this.cartDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
     return this.http.put<any>(environment.orderBaseUrl+environment.updateCartUrl, this.cartRequestDTO);
   }
 
   // Delete cart Item 
   deleteCartItem(bufdid: number): Observable<any> {
-    this.cartRequestDTO.name = this.storage.get("username");
-    this.cartRequestDTO.email = this.storage.get("email");
-    this.cartRequestDTO.cartId = bufdid;
+    this.userDTO.name = this.storage.get("username");
+    this.userDTO.email = this.storage.get("email");
+    this.cartDTO.cartId = bufdid;
+    this.cartRequestDTO.userDTO = this.userDTO;
+    this.cartRequestDTO.cartDTO = this.cartDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
     return this.http.post<any>(environment.orderBaseUrl+environment.deleteCartUrl, this.cartRequestDTO);
   }
@@ -162,7 +163,9 @@ export class ApiService {
 
   // Place the order 
   placeOrder(): Observable<any> {
-    return this.http.get<any>(environment.orderBaseUrl+environment.placeOrderUrl);
+    this.userDTO.name = this.storage.get("username");
+    this.userDTO.email = this.storage.get("email");
+    return this.http.post<any>(environment.orderBaseUrl+environment.placeOrderUrl, this.userDTO);
   }
 
   // Update status for order

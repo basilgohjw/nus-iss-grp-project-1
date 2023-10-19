@@ -34,7 +34,7 @@ public class UserOrderController {
     @Autowired
     private OrderRepository ordRepo;
     
-    @GetMapping("/placeOrder")
+    @PostMapping("/placeOrder")
     public ResponseEntity<ServerResponse> placeOrder(@RequestBody UserDTO userDTO) throws IOException {
 
         ServerResponse resp = new ServerResponse();
