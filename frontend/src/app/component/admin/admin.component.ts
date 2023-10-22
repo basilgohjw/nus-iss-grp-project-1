@@ -45,12 +45,22 @@ export class AdminComponent implements OnInit {
   addProd(desc:any, quan:any, price:any, prodname:any, image:any) {
     this.api.addProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload).subscribe(res => {
       this.products = res.oblist;
+      if (res.status == '200') {
+        alert("Product successfully added."); 
+      } else {
+        alert ("Failed to add product.");
+      } 
     });
   }
   delProd(prodid:any) {
 
     this.api.deleteProduct(prodid.value).subscribe(res => {
       this.products = res.oblist;
+      if (res.status == '200') {
+        alert("Product successfully deleted.");
+      } else {
+        alert("Failed to delete product.");
+      }
       this.ngOnInit();
     });
     

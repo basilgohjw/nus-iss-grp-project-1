@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -24,7 +24,7 @@ export class EditItemComponent implements OnInit {
   prodid: string;
   imageUrl: string = "/assets/img/noimage.png";
 
-  constructor(private route: ActivatedRoute, private api: ApiService) {
+  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {
     if (this.api.isAuthenticated) {
       this.auth = this.api.getToken();
       this.api.getProducts().subscribe(
@@ -59,7 +59,16 @@ export class EditItemComponent implements OnInit {
     console.log(this.product.productid)
     this.api.updateProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload, this.product.productid).subscribe(res => {
       console.log(res);
+      if (res.status == '200') {
+        alert("Product updated successfully.");
+      } else {
+        alert("Failed to update product.");
+      }
     });
+  }
+
+  backtoAdminPage() {
+    this.router.navigate(['/admin']);
   }
 
 }
