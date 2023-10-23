@@ -125,6 +125,7 @@ export class ApiService {
     this.productDTO.productId = product.productid;
     this.productDTO.productName = product.productname;
     this.productDTO.productPrice = product.price;
+    this.productDTO.productQuantity = product.quantity;
     this.cartRequestDTO.userDTO = this.userDTO;
     this.cartRequestDTO.productDTO = this.productDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
