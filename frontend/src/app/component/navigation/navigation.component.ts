@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navigation',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   private loggedType: string;
-  constructor(private auth: ApiService, private route: Router) {
+
+  constructor(private auth: ApiService, private route: Router, private snackBar: MatSnackBar) {
 
     if (this.auth.getAuthType() == null) {
       this.loggedType = "home";
@@ -23,13 +25,14 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.auth.getAuthType());
 
   }
+
   logout() {
     this.loggedType = "home";
     this.auth.removeToken();
     this.auth.logout();
+    this.snackBar.open('You have been logged out.', 'Close', { duration: 3000 });
     this.route.navigate(['/login']);
   }
 

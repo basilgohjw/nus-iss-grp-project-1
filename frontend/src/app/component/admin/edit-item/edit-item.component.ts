@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
 import { ApiService } from 'src/app/service/api.service';
@@ -24,7 +25,7 @@ export class EditItemComponent implements OnInit {
   prodid: string;
   imageUrl: string = "/assets/img/noimage.png";
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {
+  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router, private snackBar: MatSnackBar) {
     if (this.api.isAuthenticated) {
       this.auth = this.api.getToken();
       this.api.getProducts().subscribe(
@@ -60,9 +61,9 @@ export class EditItemComponent implements OnInit {
     this.api.updateProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload, this.product.productid).subscribe(res => {
       console.log(res);
       if (res.status == '200') {
-        alert("Product updated successfully.");
+        this.snackBar.open('Product updated successfully.', 'Close', { duration: 3000 });
       } else {
-        alert("Failed to update product.");
+        this.snackBar.open('Failed to update product.', 'Close', { duration: 3000 });
       }
     });
   }

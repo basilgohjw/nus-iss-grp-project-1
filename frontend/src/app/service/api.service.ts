@@ -19,21 +19,26 @@ export class ApiService {
     cartId: null,
     cartQuantity: 0
   };
+
   productDTO: ProductDTO = {
     productId: null,
     productName: '',
     productPrice: 0,
     productQuantity: 0
   };
+
   userDTO: UserDTO = {
     name: '',
     email: ''
   };
+
   cartRequestDTO: CartRequestDTO = {
     userDTO: this.userDTO,
     cartDTO: this.cartDTO,
     productDTO: this.productDTO
   };
+
+  cartAmount: number = 0;
   
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,7 +13,8 @@ export class RegisterComponent implements OnInit {
   private registerForm: any;
   constructor(private apiService: ApiService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar) {
     this.createForm();
   }
 
@@ -54,13 +57,14 @@ export class RegisterComponent implements OnInit {
       subscribe(res => {
         if (res.status == "400") {
           console.log("Details cannot be empty :)");
+          this.snackBar.open('An error has been occured. Please try again :)', 'Close', { duration: 3000 });
         } else {
           this.router.navigate(['/login']);
-          alert("Your account has been registered successfully. Please login :)");
+          this.snackBar.open('Your account has been registered successfully. Please login :)', 'Close', { duration: 3000 });
         }
       },
       err => {
-        alert("An error has occured. Please try again :)");
+        this.snackBar.open('An error has been occured. Please try again :)', 'Close', { duration: 3000 });
       });
   }
   

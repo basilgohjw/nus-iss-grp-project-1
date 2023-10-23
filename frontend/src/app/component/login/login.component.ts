@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   error = false;
   constructor(private apiService: ApiService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar) {
     this.createForm();
   }
 
@@ -53,21 +55,23 @@ export class LoginComponent implements OnInit {
           this.apiService.storeToken(res.authToken, "customer");
           this.apiService.storeUserInfo(res.user);
           this.router.navigate(['/home']);
+          this.snackBar.open('Logged in successfully :)', 'Close', { duration: 3000 });
           this.error = false;
         } else if (res.status == "200" && res.userType == "ADMIN") {
           this.apiService.storeToken(res.authToken, "admin");
           this.apiService.storeUserInfo(res.user);
           this.router.navigate(['/admin']);
+          this.snackBar.open('Logged in successfully :)', 'Close', { duration: 3000 });
           this.error = false;
         }
       },
       err => {
         console.log(err);
         if (err.status == "404") {
-          alert("Username is not found. Please try again :)");
+          this.snackBar.open('Username is not found. Please try again :)', 'Close', { duration: 3000 });
         }
         if (err.status == "403") {
-          alert("Invalid password. Please try again :)");
+          this.snackBar.open('Invalid credentials. Please try again :)', 'Close', { duration: 3000 });
         }
         this.router.navigate(['/login']);
       });

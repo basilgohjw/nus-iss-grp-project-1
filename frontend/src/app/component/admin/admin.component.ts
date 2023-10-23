@@ -4,6 +4,7 @@ import { Product } from 'src/app/model/product';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +17,7 @@ export class AdminComponent implements OnInit {
   showAdd = false;
   auth: string;
   
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private snackBar: MatSnackBar) { }
   imageUrl: string = "/assets/img/noimage.png";
   ngOnInit() {
     if (this.api.isAuthenticated) {
@@ -46,9 +47,9 @@ export class AdminComponent implements OnInit {
     this.api.addProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload).subscribe(res => {
       this.products = res.oblist;
       if (res.status == '200') {
-        alert("Product successfully added."); 
+        this.snackBar.open('Product successfully added.', 'Close', { duration: 3000 });
       } else {
-        alert ("Failed to add product.");
+        this.snackBar.open('Failed to add product.', 'Close', { duration: 3000 });
       } 
     });
   }
@@ -57,9 +58,9 @@ export class AdminComponent implements OnInit {
     this.api.deleteProduct(prodid.value).subscribe(res => {
       this.products = res.oblist;
       if (res.status == '200') {
-        alert("Product successfully deleted.");
+        this.snackBar.open('Product successfully deleted.', 'Close', { duration: 3000 });
       } else {
-        alert("Failed to delete product.");
+        this.snackBar.open('Failed to delete product.', 'Close', { duration: 3000 });
       }
       this.ngOnInit();
     });

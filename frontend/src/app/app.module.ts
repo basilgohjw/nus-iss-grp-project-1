@@ -20,6 +20,8 @@ import { AddressComponent } from './component/home/address/address.component';
 import { EditItemComponent } from './component/admin/edit-item/edit-item.component';
 import { OrderItemComponent } from './component/admin/order-item/order-item.component';
 import { AuthInterceptor } from './service/auth.interceptor';
+import { SharedModule } from './shared/shared.module';
+
 const appRoutes:Routes=[
   { path: '',
     redirectTo: '/login',
@@ -88,7 +90,8 @@ const appRoutes:Routes=[
     ReactiveFormsModule,
     NgbModule.forRoot(),
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [{
     provide : HTTP_INTERCEPTORS,
