@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class CartItemComponent implements OnInit {
 
   private auth: string;
-  cartlist: Cart[];
+  cartlist: Cart[] = [];
   totalSum: number = 0;
   constructor(private api: ApiService, private route: Router) {
 
@@ -27,17 +27,21 @@ export class CartItemComponent implements OnInit {
     });
 
   }
+
   updateCart(id:any, quantity:any) {
     this.api.updateCartItem(id.value, quantity.value).subscribe(res => {
       this.cartlist = res.oblist;
+      this.api.cartAmount = this.cartlist.length || 0;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
       });
     });
   }
+
   deleteItem(id:any) {
     this.api.deleteCartItem(id.value).subscribe(res => {
       this.cartlist = res.oblist;
+      this.api.cartAmount = this.cartlist.length || 0;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
       });

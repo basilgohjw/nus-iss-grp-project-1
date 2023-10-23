@@ -1,30 +1,36 @@
 <app-navigation></app-navigation>
-<div class="container ">
-    <div class="row">
-        <div class="offset-2 col-6">
-            <div class="card login shadow p-3 mb-5 bg-white rounded ">
-                    <div class="card-body">
-                            <form [formGroup]="loginForm" (ngSubmit)="login()">
-                                <div *ngIf="error">Content to render when condition is true.</div>
+
+<div class="hero_area">
+    <div class="body">
+        <div class="main">
+            <!-- Sign In Form -->
+            <section class="sign-in">
+                <div class="container">
+                    <div class="signin-content">
+                        <div class="signin-image">
+                            <figure><img src="assets/img/signin-image.jpg" alt="sign in image"></figure>
+                            <a routerLink="/register" class="signup-image-link">Create an account.</a>
+                        </div>
+    
+                        <div class="signin-form">
+                            <h2 class="form-title">Log In</h2>
+                            <form class="register-form" id="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
                                 <div class="form-group">
-                                    <div class="login-input-box">
-                                        <span class="login-input-label">Login ID:</span>
-                                        <input class="form-control login-input" formControlName="email" placeholder="Username">
-                                    </div>
-                                    <!-- <div class="invalid-error" *ngIf="!validateEmail()">
-                                        <label>* Please enter a valid Email address.</label>
-                                    </div> -->
+                                    <label for="your_name"><mat-icon [ngStyle]="{'color':'black'}" aria-label="username" matTooltip="username">person</mat-icon></label>
+                                    <input type="text" name="your_name" id="your_name" formControlName="email" placeholder="Username"/>
                                 </div>
                                 <div class="form-group">
-                                    <div class="login-input-box">
-                                        <span class="login-input-label">Password:</span>
-                                        <input type="password" class="form-control" formControlName="password" placeholder="Password" style="width:50%">
-                                    </div>
+                                    <label for="your_pass"><mat-icon [ngStyle]="{'color':'black'}" aria-label="password" matTooltip="password">key</mat-icon></label>
+                                    <input type="password" name="your_pass" id="your_pass" formControlName="password" placeholder="Password"/>
                                 </div>
-                                <button type="submit" class="btn btn-secondary align-right" value="Login">Login</button>
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                </div>
                             </form>
+                        </div>
                     </div>
-            </div>
+                </div>
+            </section>
         </div>
     </div>
-    <div>
+</div>

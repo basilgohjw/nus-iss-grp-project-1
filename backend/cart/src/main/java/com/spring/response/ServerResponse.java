@@ -1,10 +1,16 @@
 package com.spring.response;
 
+import com.spring.model.Bufcart;
+
+import java.util.List;
+
 public class ServerResponse {
 	private String status;
 	private String message;
 	private String authToken;
 	private String userType;
+
+	private List<Bufcart> oblist;
 
 	public String getAuthToken() {
 		return authToken;
@@ -40,6 +46,14 @@ public class ServerResponse {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public List<Bufcart> getOblist() {
+		return oblist;
+	}
+
+	public void setOblist(List<Bufcart> oblist) {
+		this.oblist = oblist;
 	}
 
 }
