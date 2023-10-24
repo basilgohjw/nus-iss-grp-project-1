@@ -36,7 +36,8 @@
     "tar": ">=2.2.2",
     "webpack-dev-server": ">=3.1.11",
     "ws": ">=3.3.1",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@angular/cdk": "^6.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
