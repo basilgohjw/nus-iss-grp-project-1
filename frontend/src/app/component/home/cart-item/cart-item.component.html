@@ -42,7 +42,7 @@
 
   <div class="row">
     <div class="col-9">Total Sum : {{totalSum | currency:'USD'}}</div>
-    <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="placeOrder()">Checkout <i
+    <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="placeOrder()" [disabled]="cartlist.length == 0">Checkout <i
           class="fa fa-angle-right"></i></button></div>
 
   </div>
