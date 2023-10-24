@@ -423,6 +423,23 @@ a:focus {
   color: #f16179;
 }
 
+.custom-btn a {
+  display: inline-block;
+  padding: 10px 40px;
+  background-color: #f16179;
+  color: #ffffff;
+  border: 1px solid #f16179;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.custom-btn a:hover {
+  background-color: transparent;
+  color: #f16179;
+  cursor: pointer;
+}
+
 .saving_section {
   padding-left: 45px;
   padding-right: 45px;
@@ -980,7 +997,5 @@ a:focus {
 }
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 1170px;
-  }
+  
 }
