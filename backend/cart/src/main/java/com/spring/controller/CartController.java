@@ -71,7 +71,7 @@ public class CartController {
 
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.CART_UPD_MESSAGE_CODE);
-            resp.setOblist(cartRepo.findByEmail(userDTO.getEmail()));
+            resp.setOblist(cartRepo.findByEmailAndOrderId(userDTO.getEmail(), 0));
         } catch (Exception e) {
             throw new CartCustomException("Unable to add product to cart, please try again");
         }
