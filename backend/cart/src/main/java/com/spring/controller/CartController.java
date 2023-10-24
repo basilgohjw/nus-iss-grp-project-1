@@ -24,7 +24,7 @@ import com.spring.response.CartResponse;
 import com.spring.response.ServerResponse;
 import org.springframework.web.client.RestTemplate;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+//@CrossOrigin(origins = WebConstants.ALLOWED_URL)
 @RestController
 @RequestMapping("/user")
 public class CartController {

@@ -32,7 +32,7 @@ import com.spring.service.MyUserDetailService;
 import com.spring.util.JwtUtil;
 import com.spring.util.Validator;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+//@CrossOrigin(origins = WebConstants.ALLOWED_URL)
 @RestController
 @RequestMapping("/home")
 public class HomeController {

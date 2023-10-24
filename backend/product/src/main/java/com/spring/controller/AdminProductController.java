@@ -23,7 +23,7 @@ import com.spring.response.ProductResponse;
 import com.spring.response.ServerResponse;
 import com.spring.util.Validator;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+//@CrossOrigin(origins = WebConstants.ALLOWED_URL)
 @RestController
 @RequestMapping("/admin")
 public class AdminProductController {

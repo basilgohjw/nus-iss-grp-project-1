@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.util.Validator;
 import com.spring.model.Payment;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+//@CrossOrigin(origins = WebConstants.ALLOWED_URL)
 @RestController
 @RequestMapping("/user")
 public class UserOrderController {
