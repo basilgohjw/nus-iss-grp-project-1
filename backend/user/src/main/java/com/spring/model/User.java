@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class User implements Serializable {
 
@@ -85,6 +87,7 @@ public class User implements Serializable {
 	private int age;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnoreProperties("user")
 	private Address address;
 
 	public String getEmail() {
