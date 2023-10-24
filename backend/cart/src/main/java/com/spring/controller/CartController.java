@@ -149,4 +149,11 @@ public class CartController {
         }
         return new ResponseEntity<CartResponse>(resp, HttpStatus.OK);
     }
+
+    @GetMapping("/getTestData")
+	public ResponseEntity<CartResponse> getTestData(Authentication auth) {
+		CartResponse resp = new CartResponse();
+		resp.setMessage("This is a test message for cart");
+		return new ResponseEntity<CartResponse>(resp, HttpStatus.OK);
+	}
 }

@@ -57,4 +57,11 @@ public class UserProductController {
         }
         return new ResponseEntity<ProductResponse>(resp, HttpStatus.OK);
     }
+
+    @GetMapping("/getTestData")
+	public ResponseEntity<ProductResponse> getTestData(Authentication auth) {
+		ProductResponse resp = new ProductResponse();
+		resp.setMessage("This is a test message for product");
+		return new ResponseEntity<ProductResponse>(resp, HttpStatus.OK);
+	}
 }

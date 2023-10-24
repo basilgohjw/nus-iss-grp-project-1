@@ -7,3 +7,7 @@ MAINTAINER "nus-iss-grp1"
 # Copy to war file to tomcat path  
 ADD target/cart-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/cart.war
 
+EXPOSE 8080
+
+# Start the tomcat server
+CMD ["catalina.sh", "run"]

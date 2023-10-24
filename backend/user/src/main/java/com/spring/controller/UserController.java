@@ -114,4 +114,12 @@ public class UserController {
 		}
 		return new ResponseEntity<UserResponse>(resp, HttpStatus.OK);
 	}
+
+	@GetMapping("/getTestData")
+	public ResponseEntity<UserResponse> getTestData(Authentication auth) {
+		UserResponse resp = new UserResponse();
+		resp.setMessage("This is a test message for user");
+		return new ResponseEntity<UserResponse>(resp, HttpStatus.OK);
+	}
+	
 }
