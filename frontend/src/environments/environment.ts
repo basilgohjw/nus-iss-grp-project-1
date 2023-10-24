@@ -34,7 +34,8 @@ export const environment = {
   // order url
   viewOrderUrl : "/admin/viewOrders",
   updateOrderUrl : "/admin/updateOrder",
-  placeOrderUrl : "/user/placeOrder"
+  placeOrderUrl : "/user/placeOrder",
+  processOrderUrl : "/user/processOrder"
 };
 
 /*

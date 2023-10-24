@@ -21,6 +21,7 @@ import { EditItemComponent } from './component/admin/edit-item/edit-item.compone
 import { OrderItemComponent } from './component/admin/order-item/order-item.component';
 import { AuthInterceptor } from './service/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { CheckoutComponent } from './component/home/checkout/checkout.component';
 
 const appRoutes:Routes=[
   { path: '',
@@ -63,7 +64,12 @@ const appRoutes:Routes=[
     path:'admin/order',
     component: OrderItemComponent,
     canActivate:[AuthguardGuard]
-  }
+  },
+  {
+    path:'home/order/checkout',
+    component: CheckoutComponent,
+    canActivate:[AuthguardGuard]
+  },
 ];
 
 @NgModule({
@@ -78,7 +84,8 @@ const appRoutes:Routes=[
     AddressComponent,
     AdminComponent,
     EditItemComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

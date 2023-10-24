@@ -32,6 +32,7 @@ export class CartItemComponent implements OnInit {
     this.api.updateCartItem(id.value, quantity.value).subscribe(res => {
       this.cartlist = res.oblist;
       this.api.cartAmount = this.cartlist.length || 0;
+      this.totalSum = 0;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
       });
@@ -42,6 +43,7 @@ export class CartItemComponent implements OnInit {
     this.api.deleteCartItem(id.value).subscribe(res => {
       this.cartlist = res.oblist;
       this.api.cartAmount = this.cartlist.length || 0;
+      this.totalSum = 0;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
       });
@@ -49,10 +51,7 @@ export class CartItemComponent implements OnInit {
   }
 
   placeOrder() {
-    this.api.placeOrder().subscribe(res => {
-      console.log(res);
-    });
-    this.route.navigate(['/home']);
+    this.route.navigate(['/home/order/checkout']);
   }
 
 }
