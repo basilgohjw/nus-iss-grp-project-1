@@ -10,6 +10,7 @@ import { CartDTO } from '../dto/CartDTO';
 import { CartRequestDTO } from '../dto/CartRequestDTO';
 import { ProductDTO } from '../dto/ProductDTO';
 import { UserDTO } from '../dto/UserDTO';
+import { Payment } from '../model/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -172,6 +173,17 @@ export class ApiService {
     this.userDTO.name = this.storage.get("username");
     this.userDTO.email = this.storage.get("email");
     return this.http.post<any>(environment.orderBaseUrl+environment.placeOrderUrl, this.userDTO);
+  }
+
+  // Place the order 
+  processOrder(paymentType: any, amount: any, phone: any, image:any, orderId:any): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append("paymentType", paymentType);
+    formData.append("amount", amount);
+    formData.append("phone", phone);
+    formData.append("orderId", orderId);
+    formData.append("file", image);
+    return this.http.post<any>(environment.orderBaseUrl+environment.processOrderUrl, formData);
   }
 
   // Update status for order

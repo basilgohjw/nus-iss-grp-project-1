@@ -90,7 +90,7 @@ public class CartController {
 
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.VW_CART_MESSAGE);
-            resp.setOblist(cartRepo.findByEmail(userDTO.getEmail()));
+            resp.setOblist(cartRepo.findByEmailAndOrderId(userDTO.getEmail(), 0));
         } catch (Exception e) {
             throw new CartCustomException("Unable to retrieve cart items, please try again");
         }
@@ -115,7 +115,7 @@ public class CartController {
             Bufcart selCart = cartRepo.findByBufcartIdAndEmail(cartDTO.getCartId(), userDTO.getEmail());
             selCart.setQuantity(cartDTO.getCartQuantity());
             cartRepo.save(selCart);
-            List<Bufcart> bufcartlist = cartRepo.findByEmail(userDTO.getEmail());
+            List<Bufcart> bufcartlist = cartRepo.findByEmailAndOrderId(userDTO.getEmail(), 0);
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.UPD_CART_MESSAGE);
             resp.setOblist(bufcartlist);
@@ -140,7 +140,7 @@ public class CartController {
             CartDTO cartDTO = cartRequestDTO.getCartDTO();
 
             cartRepo.deleteByBufcartIdAndEmail(cartDTO.getCartId(), userDTO.getEmail());
-            List<Bufcart> bufcartlist = cartRepo.findByEmail(userDTO.getEmail());
+            List<Bufcart> bufcartlist = cartRepo.findByEmailAndOrderId(userDTO.getEmail(), 0);
             resp.setStatus(ResponseCode.SUCCESS_CODE);
             resp.setMessage(ResponseCode.DEL_CART_SUCCESS_MESSAGE);
             resp.setOblist(bufcartlist);
