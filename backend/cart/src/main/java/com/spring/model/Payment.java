@@ -28,7 +28,7 @@ public class Payment {
 	private double amount;
 	
 	@Lob
-	@Column(name = "productimage")
+	@Column(name = "paymentimage")
 	private byte[] paymentimage;
 	
 	@Column(name = "orderId")
