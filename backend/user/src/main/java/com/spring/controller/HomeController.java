@@ -71,7 +71,7 @@ public class HomeController {
 		resp.setAuthToken(jwt);
 
 		if (userDetails != null
-				&& userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+				&& "admin".equalsIgnoreCase(user.getUsertype())) {
 			resp.setUserType("ADMIN");
 		} else {
 			resp.setUserType("CUSTOMER");

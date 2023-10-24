@@ -1,28 +1,36 @@
 <app-navigation></app-navigation>
 <div class="container ">
     <br>
+    <a routerLink="/home/cart" class="btn btn-primary"><i class="fa fa-angle-left"></i> Go to Cart</a><br>
     <div class="row">
         <div class="offset-2 col-6 ">
+            <h2 style="padding-top: 10px;"> Checkout Page</h2>
+            <br>
             <form class="form-horizontal shadow p-3 mb-5 bg-white rounded" #f="ngForm" (ngSubmit)="f.form.valid && placeOrder(paymentType, amount, phone, image)">
                 <div class="form-group">
                     <label class="control-label col-m-10">* Payment Type: </label>
                     <div class="col-m-10">
-                        <input type="text" class="form-control" ngModel name="paymentType" placeholder="Payment Type" #paymentType required/>
+                        <select class="form-control" ngModel name="paymentType" placeholder="Payment Type" #paymentType required>
+                            <option value="" disabled selected>Select your payment method</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                          </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-m-10">* Amount: </label>
                     <div class="col-m-10">
-                        <input type="text" class="form-control" ngModel name="amount" placeholder="Payment Type" #amount required/>
+                        <input type="text" class="form-control" ngModel name="amount" placeholder="Payment Type" #amount disabled required [value]="this.totalSum"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-m-10" for="phone">Phone Number: </label>
                     <div class="col-m-10">
-                        <input type="number" class="form-control" ngModel name="phone" #phone placeholder="+12342223456"/>
+                        <input type="number" class="form-control" ngModel name="phone" #phone placeholder="+12342223456" [value]="this.model.phonenumber"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="paymentType.value == 'Bank Transfer'">
+                    <label class="control-label col-m-10" for="bankTransferReceipt">Bank Transfer Receipt: </label>
                     <input type="file" class="form-control" placeholder="Product Picture" #image
                             accept="image/*" name="image"
                             (change)="handleFileInput($event.target.files)">
