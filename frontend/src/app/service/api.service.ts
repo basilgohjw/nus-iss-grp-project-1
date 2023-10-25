@@ -79,7 +79,12 @@ export class ApiService {
   // Validating user credentials
   login(user: User): Observable<any> {
     return this.http.post(this.getBaseApiURL(this.USER) + API.loginUrl,
-      JSON.stringify(user));
+      JSON.stringify(user),
+      {
+        headers:
+          { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' }
+      });
   }
 
   logout(){

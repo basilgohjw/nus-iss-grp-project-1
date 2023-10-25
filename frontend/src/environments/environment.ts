@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   // user base url
-  userBaseUrl:"http://localhost:8082",
+  userBaseUrl:"http://localhost:8082/user",
   // product base url
-  productBaseUrl:"http://localhost:8083",
+  productBaseUrl:"http://localhost:8083/product",
   // order cart base url
-  orderBaseUrl:"http://localhost:8084"
+  orderBaseUrl:"http://localhost:8084/cart"
 };
 
 /*
