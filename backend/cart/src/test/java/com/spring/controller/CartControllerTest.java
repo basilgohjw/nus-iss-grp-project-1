@@ -98,12 +98,12 @@ class CartControllerTest {
 		userDTO.setName("user");
 		userDTO.setEmail("user@gmail.com");
 		ProductDTO productDTO = new ProductDTO();
-		productDTO.setProductId(4);
-		productDTO.setProductName("Table 2");
-		productDTO.setProductPrice(10000);
-		productDTO.setProductQuantity(20);
+		productDTO.setProductId(10);
+		productDTO.setProductName("Blue Jeans");
+		productDTO.setProductPrice(62);
+		productDTO.setProductQuantity(44);
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setCartId(2);
+		cartDTO.setCartId(38);
 		cartDTO.setCartQuantity(3);
 		CartRequestDTO cartRequestDTO = new CartRequestDTO();
 		cartRequestDTO.setUserDTO(userDTO);
