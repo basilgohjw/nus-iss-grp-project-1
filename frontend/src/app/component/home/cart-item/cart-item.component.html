@@ -94,7 +94,7 @@
                   <div class="col">TOTAL PRICE</div>
                   <div class="col text-right">{{totalSum | currency:'USD'}}</div>
               </div>
-              <button class="btn" (click)="placeOrder()">CHECKOUT <i class="fa fa-angle-right"></i></button>
+              <button class="btn" (click)="placeOrder()" [disabled]="cartlist.length === 0">CHECKOUT <i class="fa fa-angle-right"></i></button>
           </div>
       </div>
     </div>
