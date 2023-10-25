@@ -20,7 +20,7 @@ import com.spring.model.Product;
 import com.spring.repository.ProductRepository;
 import com.spring.response.ProductResponse;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+@CrossOrigin(origins = { WebConstants.ALLOWED_URL, WebConstants.ALLOWED_URL_PROD })
 @RestController
 @RequestMapping("/user")
 public class UserProductController {

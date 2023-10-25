@@ -33,5 +33,6 @@ public class WebConstants {
 
 	// Domains
 	public static final String ALLOWED_URL = "http://localhost:4200";
+	public static final String ALLOWED_URL_PROD = "http://nus-iss-grp1-frontend.s3-website-ap-southeast-1.amazonaws.com";
 
 }
