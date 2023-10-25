@@ -11,11 +11,17 @@ import { CartRequestDTO } from '../dto/CartRequestDTO';
 import { ProductDTO } from '../dto/ProductDTO';
 import { UserDTO } from '../dto/UserDTO';
 import { Payment } from '../model/payment';
+import { API } from 'src/environments/apis';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  USER = 'USER';
+  PRODUCT = 'PRODUCT';
+  CART = 'CART';
+
   cartDTO: CartDTO = {
     cartId: null,
     cartQuantity: 0
@@ -45,33 +51,56 @@ export class ApiService {
 
   }
   
+  getBaseApiURL(type) {
+    if (type === this.USER) {
+      if (environment.production) {
+        return 'USER';
+      } else {
+        return environment.userBaseUrl;
+      }
+    }
+
+    if (type === this.PRODUCT) {
+      if (environment.production) {
+        return 'PRODUCT';
+      } else {
+        return environment.productBaseUrl;
+      }
+    }
+
+    if (type === this.CART) {
+      if (environment.production) {
+        return 'cart';
+      } else {
+        return environment.orderBaseUrl;
+      }
+    }
+  }
+
   // Register new users to the system
   register(user: User): Observable<any> {
-    return this.http.post(environment.userBaseUrl+environment.signupUrl,
+    return this.http.post(this.getBaseApiURL(this.USER) + API.signupUrl,
       JSON.stringify(user),
       {
         headers:
-          { 'Content-Type': 'application/json' }
+          { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' }
       });
   }
   
   // Validating user credentials
   login(user: User): Observable<any> {
-    return this.http.post(environment.userBaseUrl+environment.loginUrl,
-      JSON.stringify(user),
-      {
-        headers:
-          { 'Content-Type': 'application/json' }
-      });
+    return this.http.post(this.getBaseApiURL(this.USER) + API.loginUrl,
+      JSON.stringify(user));
   }
 
   logout(){
-    this.http.get<any>(environment.userBaseUrl+environment.logoutUrl);
+    this.http.get<any>(this.getBaseApiURL(this.USER) + API.logoutUrl);
   }
 
   // Update Address 
   addOrUpdateAddress(adr: Address): Observable<any> {
-    return this.http.post<any>(environment.userBaseUrl+environment.addAddressUrl, 
+    return this.http.post<any>(this.getBaseApiURL(this.USER) + API.addAddressUrl, 
       adr, 
       {
         headers:
@@ -81,12 +110,12 @@ export class ApiService {
 
   // Fetch address 
   getAddress(): Observable<any> {
-    return this.http.get<any>(environment.userBaseUrl+environment.viewAddressUrl);
+    return this.http.get<any>(this.getBaseApiURL(this.USER) + API.viewAddressUrl);
   }
 
   // Fetching all the products
   getProducts(): Observable<any> {
-    return this.http.get<any>(environment.productBaseUrl+environment.productsUrl);
+    return this.http.get<any>(this.getBaseApiURL(this.PRODUCT) + API.productsUrl);
   }
 
   // Add product in the system
@@ -98,7 +127,7 @@ export class ApiService {
     formData.append("productname", prodname);
     formData.append("quantity", quan);
     formData.append("file", image);
-    return this.http.post<any>(environment.productBaseUrl+environment.addProductUrl, formData);
+    return this.http.post<any>(this.getBaseApiURL(this.PRODUCT) + API.addProductUrl, formData);
   }
   
   // Update Product for Logged Admin User
@@ -111,12 +140,12 @@ export class ApiService {
     formData.append("quantity", quan);
     formData.append("file", image);
     formData.append("productId", productid);
-    return this.http.put<any>(environment.productBaseUrl+environment.updateProductUrl, formData);
+    return this.http.put<any>(this.getBaseApiURL(this.PRODUCT) + API.updateProductUrl, formData);
   }
 
   // Delete Product
   deleteProduct( prodid: number) {
-    return this.http.delete<any>(environment.productBaseUrl+environment.deleteProductUrl + "?productId=" + prodid);
+    return this.http.delete<any>(this.getBaseApiURL(this.PRODUCT) + API.deleteProductUrl + "?productId=" + prodid);
   }
 
   // Add products to the cart
@@ -130,14 +159,14 @@ export class ApiService {
     this.cartRequestDTO.userDTO = this.userDTO;
     this.cartRequestDTO.productDTO = this.productDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
-    return this.http.post<any>(environment.orderBaseUrl+environment.addToCartUrl, this.cartRequestDTO);
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.addToCartUrl, this.cartRequestDTO);
   }
 
   // View cart items
   getCartItems(): Observable<any> {
     this.userDTO.name = this.storage.get("username");
     this.userDTO.email = this.storage.get("email");
-    return this.http.post<any>(environment.orderBaseUrl+environment.viewCartUrl, this.userDTO);
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.viewCartUrl, this.userDTO);
   }
 
   // Update items quantity in the cart
@@ -149,7 +178,7 @@ export class ApiService {
     this.cartRequestDTO.userDTO = this.userDTO;
     this.cartRequestDTO.cartDTO = this.cartDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
-    return this.http.put<any>(environment.orderBaseUrl+environment.updateCartUrl, this.cartRequestDTO);
+    return this.http.put<any>(this.getBaseApiURL(this.CART) + API.updateCartUrl, this.cartRequestDTO);
   }
 
   // Delete cart Item 
@@ -160,19 +189,19 @@ export class ApiService {
     this.cartRequestDTO.userDTO = this.userDTO;
     this.cartRequestDTO.cartDTO = this.cartDTO;
     console.log("this.cartRequestDTO: ", this.cartRequestDTO);
-    return this.http.post<any>(environment.orderBaseUrl+environment.deleteCartUrl, this.cartRequestDTO);
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.deleteCartUrl, this.cartRequestDTO);
   }
 
   // Fetch available orders placed
   getOrders() {
-    return this.http.get<any>(environment.orderBaseUrl+environment.viewOrderUrl)
+    return this.http.get<any>(this.getBaseApiURL(this.CART) + API.viewOrderUrl);
   }
 
   // Place the order 
   placeOrder(): Observable<any> {
     this.userDTO.name = this.storage.get("username");
     this.userDTO.email = this.storage.get("email");
-    return this.http.post<any>(environment.orderBaseUrl+environment.placeOrderUrl, this.userDTO);
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.placeOrderUrl, this.userDTO);
   }
 
   // Place the order 
@@ -183,7 +212,7 @@ export class ApiService {
     formData.append("phone", phone);
     formData.append("orderId", orderId);
     formData.append("file", image);
-    return this.http.post<any>(environment.orderBaseUrl+environment.processOrderUrl, formData);
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.processOrderUrl, formData);
   }
 
   // Update status for order
@@ -191,7 +220,7 @@ export class ApiService {
     const formData: FormData = new FormData();
     formData.append("orderId", order.orderId);
     formData.append("orderStatus", order.orderStatus);
-    return this.http.post<any>(environment.orderBaseUrl+environment.updateOrderUrl, formData)
+    return this.http.post<any>(this.getBaseApiURL(this.CART) + API.updateOrderUrl, formData);
   }
 
   // Authentication Methods 
