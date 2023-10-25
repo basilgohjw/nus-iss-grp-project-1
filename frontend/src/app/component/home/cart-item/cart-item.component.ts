@@ -14,7 +14,7 @@ export class CartItemComponent implements OnInit {
   private auth: string;
   cartlist: Cart[] = [];
   totalSum: number = 0;
-  constructor(private api: ApiService, private route: Router) {
+  constructor(public api: ApiService, private route: Router) {
 
   }
 

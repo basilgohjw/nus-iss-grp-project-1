@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private loggedType: string;
+  loggedType: string;
 
   constructor(private auth: ApiService, private route: Router, private snackBar: MatSnackBar) {
 

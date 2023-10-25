@@ -53,27 +53,15 @@ export class ApiService {
   
   getBaseApiURL(type) {
     if (type === this.USER) {
-      if (environment.production) {
-        return 'USER';
-      } else {
-        return environment.userBaseUrl;
-      }
+      return environment.userBaseUrl;
     }
 
     if (type === this.PRODUCT) {
-      if (environment.production) {
-        return 'PRODUCT';
-      } else {
-        return environment.productBaseUrl;
-      }
+      return environment.productBaseUrl;
     }
 
     if (type === this.CART) {
-      if (environment.production) {
-        return 'cart';
-      } else {
-        return environment.orderBaseUrl;
-      }
+      return environment.orderBaseUrl;
     }
   }
 
@@ -91,7 +79,12 @@ export class ApiService {
   // Validating user credentials
   login(user: User): Observable<any> {
     return this.http.post(this.getBaseApiURL(this.USER) + API.loginUrl,
-      JSON.stringify(user));
+      JSON.stringify(user),
+      {
+        headers:
+          { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' }
+      });
   }
 
   logout(){

@@ -6,7 +6,7 @@
         <div class="offset-2 col-6 ">
             <h2 style="padding-top: 10px;"> Checkout Page</h2>
             <br>
-            <form class="form-horizontal shadow p-3 mb-5 bg-white rounded" #f="ngForm" (ngSubmit)="f.form.valid && placeOrder(paymentType, amount, phone, image)">
+            <form class="form-horizontal shadow p-3 mb-5 bg-white rounded" #f="ngForm" (ngSubmit)="f.form.valid && placeOrder(paymentType, amount, phone)">
                 <div class="form-group">
                     <label class="control-label col-m-10">* Payment Type: </label>
                     <div class="col-m-10">

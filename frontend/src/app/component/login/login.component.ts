@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: any;
+  loginForm: any;
   error = false;
   constructor(private apiService: ApiService,
     private router: Router,

@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/model/address';
 import { Cart } from 'src/app/model/cart';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
@@ -28,7 +29,7 @@ export class CheckoutComponent implements OnInit {
 
   };
 
-  constructor(private api: ApiService, private route: Router) { }
+  constructor(private api: ApiService, private route: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.api.getCartItems().subscribe(res => {
@@ -62,7 +63,7 @@ export class CheckoutComponent implements OnInit {
   //     this.route.navigate(['/home']);
   //   });
   // }
-  placeOrder(paymentType: any, amount: any, phone: any, image:any) {
+  placeOrder(paymentType: any, amount: any, phone: any) {
     console.log("paymentType: ", paymentType.value);
     console.log("amount", amount.value);
     console.log("phone", phone.value);
@@ -78,6 +79,7 @@ export class CheckoutComponent implements OnInit {
             this.cartlist = res2.oblist;
             this.api.cartAmount = this.cartlist.length;
           });
+          this.snackBar.open('Order placed successfully.', 'Close', { duration: 3000 });
         })
       });
       this.route.navigate(['/home']);
