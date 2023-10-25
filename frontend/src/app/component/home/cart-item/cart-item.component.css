@@ -1,5 +1,5 @@
 .body {
-  background: #ddd;
+  background: #f8f8f8;
   min-height: 100vh;
   vertical-align: middle;
   display: flex;
@@ -103,6 +103,10 @@ img {
 
 .back-to-shop {
   margin-top: 4.5rem;
+}
+
+.back-to-shop:hover {
+  cursor: pointer;
 }
 
 h5 {

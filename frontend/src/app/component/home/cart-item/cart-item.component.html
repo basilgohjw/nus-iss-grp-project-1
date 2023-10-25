@@ -1,50 +1,4 @@
 <app-navigation></app-navigation>
-<!-- <div class="container">
-  <table id="cart" class="table table-hover table-condensed table-borderless">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tr *ngFor="let cart of cartlist">
-      <td>
-        {{cart.productname}}
-      </td>
-      <td>{{cart.price | currency:'USD'}}</td>
-      <td>
-
-        <div class="row">
-          <div class="col-6">
-            <input type="number" value="{{cart.quantity}}" #quant>
-            <input type="hidden" value="{{cart.bufcartId}}" #prod>
-          </div>
-          <div class="col-6">
-            <button class="btn btn-info btn-sm" (click)="updateCart(prod,quant)">Update</button>
-          </div>
-        </div>
-      </td>
-      <td>
-        {{cart.quantity*cart.price | currency:'USD'}}
-
-      </td>
-      <td>
-        <button class="btn btn-info btn-sm" (click)="deleteItem(prod)">Delete</button>
-      </td>
-    </tr>
-  </table>
-
-  <div class="row">
-    <div class="col-9">Total Sum : {{totalSum | currency:'USD'}}</div>
-    <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="placeOrder()" [disabled]="cartlist.length == 0">Checkout <i
-          class="fa fa-angle-right"></i></button></div>
-
-  </div>
-
-</div> -->
 
 <div class="hero_area">
   <div class="body">
@@ -75,7 +29,7 @@
                 </div>
               </ng-container>
               
-              <div class="back-to-shop"><a href="#"><i class="fa fa-angle-left"></i></a><span class="text-muted" routerLink="/home">Back to shop</span></div>
+              <div class="back-to-shop" routerLink="/home"><a><i class="fa fa-angle-left"></i></a><span class="text-muted">Back to shop</span></div>
           </div>
           <div class="col-md-4 summary">
               <div><h5><b>Summary</b></h5></div>

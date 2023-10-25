@@ -68,7 +68,7 @@ export class CheckoutComponent implements OnInit {
     console.log("amount", amount.value);
     console.log("phone", phone.value);
     if (paymentType == undefined || paymentType == null || paymentType == '' || amount == undefined || amount == null || amount == 0) {
-      alert("Please fill in the mandatory fields.");
+      this.snackBar.open('Please fill in the mandatory fields.', 'Close', { duration: 3000 });
     } else {
       this.api.placeOrder().subscribe(res => {
         console.log(res);
