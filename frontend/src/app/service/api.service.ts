@@ -53,21 +53,15 @@ export class ApiService {
   
   getBaseApiURL(type) {
     if (type === this.USER) {
-      if (environment.production) {
-        return environment.userBaseUrl;
-      }
+      return environment.userBaseUrl;
     }
 
     if (type === this.PRODUCT) {
-      if (environment.production) {
-        return environment.productBaseUrl;
-      }
+      return environment.productBaseUrl;
     }
 
     if (type === this.CART) {
-      if (environment.production) {
-        return environment.orderBaseUrl;
-      }
+      return environment.orderBaseUrl;
     }
   }
 
