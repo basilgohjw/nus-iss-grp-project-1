@@ -238,6 +238,11 @@ a:focus {
   color: #000000;
 }
 
+.user_option a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
 .user_option a span {
   margin-left: 5px;
 }
@@ -427,7 +432,7 @@ a:focus {
   display: inline-block;
   padding: 10px 40px;
   background-color: #f16179;
-  color: #ffffff;
+  color: #ffffff !important;
   border: 1px solid #f16179;
   border-radius: 5px;
   -webkit-transition: all 0.3s;
@@ -435,8 +440,8 @@ a:focus {
 }
 
 .custom-btn a:hover {
-  background-color: transparent;
-  color: #f16179;
+  background-color: #ffffff;
+  color: #f16179 !important;
   cursor: pointer;
 }
 
