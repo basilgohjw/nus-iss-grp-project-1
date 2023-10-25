@@ -62,7 +62,7 @@ export class CheckoutComponent implements OnInit {
   //     this.route.navigate(['/home']);
   //   });
   // }
-  placeOrder(paymentType: any, amount: any, phone: any, image:any) {
+  placeOrder(paymentType: any, amount: any, phone: any) {
     console.log("paymentType: ", paymentType.value);
     console.log("amount", amount.value);
     console.log("phone", phone.value);
