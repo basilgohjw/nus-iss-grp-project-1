@@ -27,7 +27,7 @@ import com.spring.response.Response;
 import com.spring.response.UserResponse;
 import com.spring.util.Validator;
 
-@CrossOrigin(origins = WebConstants.ALLOWED_URL)
+@CrossOrigin(origins = { WebConstants.ALLOWED_URL, WebConstants.ALLOWED_URL_PROD })
 @RestController
 @RequestMapping("/user")
 public class UserController {
